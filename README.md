@@ -13,7 +13,7 @@
 
 The data set we initially looked at was the stats of Pokemon from this site: https://gist.github.com/armgilles/194bcff35001e7eb53a2a8b441e8b2c6. The stats of a Pokemon include: Pokedex Number, Name, Type 1, Type 2, Total, HP (hit points), Attack, Defense, Special Attack, Special Defense, Speed, Generation, and Legendary status. (insert what is the structure for our neural network here since it's the same for each attempt)
 
-### Naive Attempt at Categorizing
+### `Naive Attempt at Categorizing`
 
 This was our first attempt at classifying the dataset and the corresponding code is in the ***pokemonNaive.md*** file.
 
@@ -29,15 +29,15 @@ Some preprocessing we did to the data in this attempt was delete the Type 2 colu
 
 * **Results of Attempt**
 
-### Attempt Based on Speed
+### `Attempt Based on Speed`
 
 dfd
 
-### Attempt Based on Ratio of Total Attack Stats to Total Defense Stats
+### `Attempt Based on Ratio of Total Attack Stats to Total Defense Stats`
 
 dfd
 
-### Overall Results and Conclusion
+### `Overall Results and Conclusion`
 
 ## Letter Recognition Dataset
 
