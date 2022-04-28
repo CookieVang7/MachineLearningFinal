@@ -10,7 +10,7 @@
 
 ## Pokemon Dataset
 
-words here
+The data set we initially looked at was the stats of Pokemon from this site: https://gist.github.com/armgilles/194bcff35001e7eb53a2a8b441e8b2c6. The stats of a Pokemon include: Pokedex Number, Name, Type 1, Type 2, Total, HP (hit points), Attack, Defense, Special Attack, Special Defense, Speed, Generation, and Legendary status
 
 ### Naive Attempt at Categorizing
 
