@@ -12,8 +12,11 @@
 words here
 
 ### Naive Attempt at Categorizing
+dfd
 ### Attempt Based on Speed
+dfd
 ### Attempt Based on Ratio of Total Attack Stats to Total Defense Stats
+dfd
 
 ## Letter Recognition Dataset
 We found a dataset that took 20,000 pictures of drawn letters and converted them into information (as shown below). Then we based our neural network on the example, with two layers of 64 nodes with relu as an activation function and a final layer with softmax as an activation function. With this setup, by the third epoch the neural network had over 90% accuracy. By the end it averages 99.4% accuracy with no drop off after evaluating the testing data. 
