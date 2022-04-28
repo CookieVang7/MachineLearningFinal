@@ -13,7 +13,7 @@
 
 The data set we initially looked at was the stats of Pokemon from this site: https://gist.github.com/armgilles/194bcff35001e7eb53a2a8b441e8b2c6. The stats of a Pokemon include: Pokedex Number, Name, Type 1, Type 2, Total, HP (hit points), Attack, Defense, Special Attack, Special Defense, Speed, Generation, and Legendary status. (insert what is the structure for our neural network here since it's the same for each attempt)
 
-### `Naive Attempt at Categorizing`
+### `Naive Attempt at Categorizing` <a name="naive-attempt"></a>
 
 This was our first attempt at classifying the dataset and the corresponding code is in the ***pokemonNaive.md*** file.
 
@@ -29,17 +29,17 @@ Some preprocessing we did to the data in this attempt was delete the Type 2 colu
 
 * **Results of Attempt**
 
-### `Attempt Based on Speed`
+### `Attempt Based on Speed` <a name="speed-attempt"></a>
 
 dfd
 
-### `Attempt Based on Ratio of Total Attack Stats to Total Defense Stats`
+### `Attempt Based on Ratio of Total Attack Stats to Total Defense Stats` <a name="ratio-attempt"></a>
 
 dfd
 
-### `Overall Results and Conclusion`
+### `Overall Results and Conclusion` <a name="results-conclusion"></a>
 
-## Letter Recognition Dataset
+## Letter Recognition Dataset 
 
 We found a dataset that took 20,000 pictures of drawn letters and converted them into information (as shown below). Then we based our neural network on the example, with two layers of 64 nodes with relu as an activation function and a final layer with softmax as an activation function. With this setup, by the third epoch the neural network had over 90% accuracy. By the end it averages 99.4% accuracy with no drop off after evaluating the testing data. 
 
