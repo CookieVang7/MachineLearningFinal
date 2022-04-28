@@ -20,18 +20,34 @@ This was our first attempt at classifying the dataset and the corresponding code
 ![pokemonTypes](https://user-images.githubusercontent.com/60119741/165833698-ddbb4d76-e68b-49cd-b343-d9e2da98d4f1.png)
 
 * **Goal:** There are 18 types of Pokemon seen above. Our goal was to classify a Pokemon's Type 1 based on its battle stats (Total, HP, Attack, Defense, Special Attack, Special Defense, and Speed).
-* **Hypothesis** Our initial hypothesis was that the neural network would do a really bad job at classifying the Pokemon because there 18 types/categories. Since the output layer adds up to 1 which is spread throughout the 18 possibilities, the neural network will not answer with a lot of confidence.
-* **Design Matrix/Training Process:** 
+* **Hypothesis:** Our initial hypothesis was that the neural network would do a really bad job at classifying the Pokemon because there 18 types/categories. Since the output layer adds up to 1 which is spread throughout the 18 possibilities, the neural network will not answer with a lot of confidence.
+* **Design Matrix:** 
 
 ![pokemon1DM](https://user-images.githubusercontent.com/60119741/165838581-fa6c1b6a-12ee-4ab9-b89e-046a522e968e.jpg)
 
-Some preprocessing we did to the data in this attempt was delete the Type 2 column for all the Pokemon because not all Pokemon have a second type, so that value showed as NA. We also deleted the Generation column since a Pokemon's generation contributes nothing to a Pokemon's type. We used all 800 data points/pokemon and did an 80/20 split for the training data and testing data respectively. Since Pokemon are designed uniquely, we didn't want the training data to specialize on the Pokemon we gave it, so we opted to hand it less data with the 80/20 split versus a 90/10 split. We had 7 features seen in the image above and our labels were the Pokemon's type. Each type was coded into to a number (not ordered) ranging from 0 to 17. 
+Some preprocessing we did to the data in this attempt was delete the Type 2 column for all the Pokemon because not all Pokemon have a second type, so that value showed as NA. We also deleted the Generation column since a Pokemon's generation contributes nothing to a Pokemon's type.  We had 7 features seen in the image above and our labels were the Pokemon's type. Each type was coded into to a number (not ordered) ranging from 0 to 17. 
 
-* **Results of Attempt**
+* **Process/Results of Attempt:**  We used all 800 data points/pokemon and did an 80/20 split for the training data and testing data respectively. Since Pokemon are designed uniquely, we didn't want the training data to specialize on the Pokemon we gave it, so we opted to hand it less data with the 80/20 split versus a 90/10 split. As predicted, we had poor training and test accuracy with test accuracy usually around 20%. We tried to increase the capacity of the network by adding more hidden layers and more nodes, but the results didn't budge at all. We then prioritized getting our accuracy up versus overfitting, so we doubled the number of epochs and found the testing accuracy was raised by about 5%.  With both the training and test accuracy really low, we did not utilize regularization on this attempt. 
 
 ### `Attempt Based on Speed` <a name="speed-attempt"></a>
 
-dfd
+This was our first attempt at classifying the Pokemon dataset.
+
+* **Goal:** Based on the poor results from the first attempt, we chose to reduce the 18 types into 4 categories based on speed. How we went about this can be seen in a file we created called ***Average Pokemon Speed Based on Pokemon FireRed and Pokemon Emerald.csv***. We took the speed of every Pokemon in the games Pokemon FireRed and Pokemon Emerald and collected them in a spreadsheet, organizing it by the types of Pokemon. Then we found the average of the speeds and split up the types into the categories so that each category had a similar number of types. Our goal for this attempt was to classify Pokemon into one of the four categories: 
+    * Super Slow (0): Fairy, Steel, Rock, Ground, Grass
+    * Slow (1): Dark, Water, Ghost, Bug, Ice
+    * Medium (2): Fire, Fighting, Normal, Poison
+    * Fast (3): Dragon, Electric, Flying, Psychic
+
+
+* **Hypothesis:** Our initial hypothesis was that the neural network would do a really bad job at classifying the Pokemon because there 18 types/categories. Since the output layer adds up to 1 which is spread throughout the 18 possibilities, the neural network will not answer with a lot of confidence.
+* **Design Matrix:** 
+
+![pokemon1DM](https://user-images.githubusercontent.com/60119741/165838581-fa6c1b6a-12ee-4ab9-b89e-046a522e968e.jpg)
+
+Some preprocessing we did to the data in this attempt was delete the Type 2 column for all the Pokemon because not all Pokemon have a second type, so that value showed as NA. We also deleted the Generation column since a Pokemon's generation contributes nothing to a Pokemon's type.  We had 7 features seen in the image above and our labels were the Pokemon's type. Each type was coded into to a number (not ordered) ranging from 0 to 17. 
+
+* **Process/Results of Attempt:**  We used all 800 data points/pokemon and did an 80/20 split for the training data and testing data respectively. Since Pokemon are designed uniquely, we didn't want the training data to specialize on the Pokemon we gave it, so we opted to hand it less data with the 80/20 split versus a 90/10 split. As predicted, we had poor training and test accuracy with test accuracy usually around 20%. We tried to increase the capacity of the network by adding more hidden layers and more nodes, but the results didn't budge at all. We then prioritized getting our accuracy up versus overfitting, so we doubled the number of epochs and found the testing accuracy was raised by about 5%.  With both the training and test accuracy really low, we did not utilize regularization on this attempt. 
 
 ### `Attempt Based on Ratio of Total Attack Stats to Total Defense Stats` <a name="ratio-attempt"></a>
 
