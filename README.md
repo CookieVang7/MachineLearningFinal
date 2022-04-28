@@ -2,7 +2,7 @@
 ## Chineng "Cookie" Vang, Conner "Maurice" Hettinger, Ben Burgess
 
 # Table of Contents
-- [Pokemon Dataset](#overview-purpose)
+- [Pokemon Dataset](#pokemon-dataset)
 - [Solution-Structure](#solution-structure)
 - [User Documentation](#user-documentation)
 - [Table Structure](#table-structure)
