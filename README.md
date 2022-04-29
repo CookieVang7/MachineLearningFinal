@@ -47,11 +47,28 @@ This was our second attempt at classifying the Pokemon dataset.
 
 For preprocessing, we decided to only consider Pokemon with 2 types. In the last attempt, we omitted Type 2 from all Pokemon, so this time we wanted to try considering either all dual type Pokemon or all single type Pokemon to see if that made a difference. Considering all dual types also gave us a way to delete all entries with NA in the dataset. We again deleted the Generation column and used the same 7 features seen as we did for the first attempt. Each category/label was coded into a number (not ordered) ranging from 0 to 3. 
 
-* **Process/Results of Attempt:** After filtering out all the single type Pokemon, our dataset was cut roughly in half to 414 data points/pokemon. We again did an 80/20 split for the training data and testing data respectively. We predicted correctly and saw our testing accuracy rise to about 44% we had poor training and test accuracy with test accuracy usually around 20%. We tried to increase the capacity of the network by adding more hidden layers and more nodes, but found that the testing accuracy generally became worse, probably overfitting.
+* **Process/Results of Attempt:** After filtering out all the single type Pokemon, our dataset was cut roughly in half to 414 data points/pokemon. We again did an 80/20 split for the training data and testing data respectively. We predicted correctly and saw our testing accuracy rise to about 44%, a significant increase from our  testing accuracy on the last attempt. We tried to increase the capacity of the network by adding more hidden layers and more nodes, but found that the testing accuracy generally became worse, probably overfitting.
 
 ### `Attempt Based on Ratio of Total Attack Stats to Total Defense Stats` <a name="ratio-attempt"></a>
 
-dfd
+This was our last attempt at using the Pokemon dataset.
+
+* **Goal:** For this attempt, we divided the 18 types of Pokemon into 3 categories (low/mid/high) based on the ratio of their combined attack & special attack versus their combined defense and special defense. Essentially, is a pokemon type more likely to have a better offense or defense? As an example, a steel type pokemon on average has less attack power than it does defense, and a fire type pokemon on average has more attack power than it does defense Our categorization was based on the model from https://imgur.com/gallery/fGPnPFV: 
+![pokemon3DM](https://user-images.githubusercontent.com/60119741/165883901-e2eecc9f-d12a-44d2-bebe-54266a4ce3e2.jpg) <br>
+Our goal is to classify pokemon into either low, mid, or high:
+    * Low (0): Ghost, Bug, Rock, Steel, Fairy
+    * Mid (1): Water, Ground, Grass, Psychic, Ice, Poison, Normal
+    * High (2): Electric, Flying, Dragon, Fighting, Fire, Dark
+
+* **Hypothesis:** We did not think this attempt would yield a higher test accuracy than the second attempt, because although the graph above separates the types more distinctly than our previous two attempts (which helps the network answer more confidently), the values on the y-axis are within 0.5 of each other. Although the graph looks promising, the values still seem relatively close together. We thought that as a result, the network would again struggle to differentiate between the 3 categories, so we believed this would produce test accuracy more or less the same as the previous attempt. 
+
+* **Design Matrix:** 
+
+![pokemon4DM](https://user-images.githubusercontent.com/60119741/165886772-b1a7c7b5-d687-405e-a37b-bfbc6d629863.jpg)
+
+We did far more preprocessing than we did compared to the other two attempts. We took out Pokemon number, Name, Type 2, Total, HP, Speed, Generation, and Legendary status. That left 4 features: Attack, Defense, Special Attack, and Special Defense. We chose to do this to filter out noise and let the network only focus on the stats that truly matter. After little progress with considering dual type Pokemon in the second attempt, for this attempt, we chose to only consider Pokemon that have a single type. It isn’t unusual when a dual type Pokemon (say Heracross, a Pokemon that is a bug and fighting type) has a type that contradicts the other. Using Heracross as an example, bug types usually have a low attack stat, but because Heracross is also a fighting type, its attack is very high. This makes Heracross hard to categorize because the high attack stat would suggest to the model that Heracross is not a bug type. The three categories were labeled 0 through 2.
+
+* **Process/Results of Attempt:** After filtering out the dual types, the dataset was left with 386 Pokemon. We again did an 80/20 split for the training data and testing data respectively. We were pleasantly wrong on this attempt, and saw a vast improvement on the testing accuracy, which ranged from 60-70%. This was by far our best attempt, but the network was still overfitting. To address this, we implemented L2 regularization as a way to reduce the weights and generalize the network. The addition of regularization was successful, as we found our training and testing data exhibiting very similar accuracies.
 
 ### `Overall Results and Conclusion` <a name="results-conclusion"></a>
 
@@ -59,7 +76,7 @@ dfd
 
 We found a dataset that took 20,000 pictures of drawn letters and converted them into information (as shown below). Then we based our neural network on the example, with two layers of 64 nodes with relu as an activation function and a final layer with softmax as an activation function. With this setup, by the third epoch the neural network had over 90% accuracy. By the end it averages 99.4% accuracy with no drop off after evaluating the testing data. 
 
-This seems to be better overall for the neural network because there are tons of examples of letters being processed from each category (a-z). Whereas the pokemon dataset only had 600 examples with extremely imbalanced categories. Also we found that pokemon type is fairly independent from its stats, so in this case the information being processed is more related to the category we are trying to guess. 
+This seems to be better overall for the neural network because there are tons of examples of letters being processed from each category (a-z). Whereas the pokemon dataset only had 800 examples with extremely imbalanced categories. Also we found that pokemon type is fairly independent from its stats, so in this case the information being processed is more related to the category we are trying to guess. 
 
 **Attribute Information:**
 1. lettr capital letter (26 values from A to Z)
