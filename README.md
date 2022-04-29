@@ -6,8 +6,8 @@
     - [`Naive Attempt at Categorizing`](#naive-attempt)  
     - [`Attempt Based on Speed`](#speed-attempt)
     - [`Attempt Based on Ratio of Total Attack Stats to Total Defense Stats`](#ratio-attempt)
-    - [`Overall Results and Conclusion`](#results-conclusion)
 - [Letter Recognition Dataset](#letter-recognition-dataset)
+- [Overall Results and Conclusion](#results-conclusion)
 
 ## Pokemon Dataset
 
@@ -70,8 +70,6 @@ We did far more preprocessing than we did compared to the other two attempts. We
 
 * **Process/Results of Attempt:** After filtering out the dual types, the dataset was left with 386 Pokemon. We again did an 80/20 split for the training data and testing data respectively. We were pleasantly wrong on this attempt, and saw a vast improvement on the testing accuracy, which ranged from 60-70%. This was by far our best attempt, but the network was still overfitting. To address this, we implemented L2 regularization as a way to reduce the weights and generalize the network. The addition of regularization was successful, as we found our training and testing data exhibiting very similar accuracies.
 
-### `Overall Results and Conclusion` <a name="results-conclusion"></a>
-
 ## Letter Recognition Dataset 
 
 We found a dataset that took 20,000 pictures of drawn letters and converted them into information (as shown below). Then we based our neural network on the example, with two layers of 64 nodes with relu as an activation function and a final layer with softmax as an activation function. With this setup, by the third epoch the neural network had over 90% accuracy. By the end it averages 99.4% accuracy with no drop off after evaluating the testing data. 
@@ -96,4 +94,6 @@ This seems to be better overall for the neural network because there are tons of
 15. xegvy correlation of x-ege with y (integer)
 16. y-ege mean edge count bottom to top (integer)
 17. yegvx correlation of y-ege with x (integer)
+
+## Overall Results and Conclusion <a name="results-conclusion"></a>
 
