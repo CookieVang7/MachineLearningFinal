@@ -72,9 +72,11 @@ We did far more preprocessing than we did compared to the other two attempts. We
 
 ## Letter Recognition Dataset 
 
-We found a dataset that took 20,000 pictures of drawn letters and converted them into information (as shown below). Then we based our neural network on the example, with two layers of 64 nodes with relu as an activation function and a final layer with softmax as an activation function. With this setup, by the third epoch the neural network had over 90% accuracy. By the end it averages 99.4% accuracy with no drop off after evaluating the testing data. 
+The goal is to use a classification network in order to recognize hand written letters. We made each letter its own category and gave the neural network numerical information about each letter (described below). We based our neural network on the iris example, with two layers of 64 nodes with relu as an activation function and a final layer with softmax as an activation function. Softmax was good to use becaue we are trying to categorize the data. Relu was nice because it is simple and efficient. With this setup, by the third epoch the neural network had over 90% accuracy. By the end it averages 99.4% accuracy with no drop off after evaluating the testing data. We then attempted to increase the amount of hidden layers and nodes to see how it would affect accuarcy/loss. In both scenarios they were pretty close to being identical. It would vary randomly between 97%-99% every time we reran it. 
 
-This seems to be better overall for the neural network because there are tons of examples of letters being processed from each category (a-z). Whereas the pokemon dataset only had 800 examples with extremely imbalanced categories. Also we found that pokemon type is fairly independent from its stats, so in this case the information being processed is more related to the category we are trying to guess. 
+We did not want to use a recurrent neural network because the data is nonsequential. Also, we did not want to use convolutional neural networks because there was no data compression and feed forwards was easier to use. 
+
+![Screenshot from 2022-04-29 13-35-57](https://user-images.githubusercontent.com/60119741/166005668-088a044e-bda2-4a2d-916e-d827c69849e7.png)
 
 **Attribute Information:**
 1. lettr capital letter (26 values from A to Z)
