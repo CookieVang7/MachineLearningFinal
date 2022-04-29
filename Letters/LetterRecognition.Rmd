@@ -1,0 +1,257 @@
+---
+title: "LetterRecognition"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+library(keras)
+library(tfdatasets)
+
+letters <- read.csv("letter-recognition.csv")
+
+names(letters)[3] <- "Type.1"
+
+
+summary(letters)
+head(letters)
+
+#You can  refer to columns by name or by number:
+head(letters[2]) # head takes the first few elements
+
+head(letters$Type.1)
+
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r}
+#You can refer to rows by numbers, note difference from columns:
+letters[5,]
+
+#Ranges of columns:
+head(letters[1:3])
+
+#Ranges of rows:
+letters[1:3,]
+```
+
+```{r}
+
+#CATEGORIZING BASED ON SPEED
+
+#SLOW (0): Dark, Water, Grass, Ground, Rock, Steel, Ice, Poison, Bug, Fairy, Ghost
+#MEDIUM (1): Normal, Fire, Fighting, Psychic
+#FAST (2): Flying, Electric, Dragon
+
+catToNum0 <- function(c) {
+  ifelse (c == "A",0,c) 
+}
+
+catToNum1 <- function(c) {
+  ifelse (c == "B",1,c) 
+}
+
+catToNum2 <- function(c) {
+  ifelse (c == "C",2,c) 
+}
+
+catToNum3 <- function(c) {
+  ifelse (c == "D",3,c) 
+}
+
+catToNum4 <- function(c) {
+  ifelse (c == "E",4,c) 
+}
+
+catToNum5 <- function(c) {
+  ifelse (c == "F",5,c) 
+}
+
+catToNum6 <- function(c) {
+  ifelse (c == "G",6,c) 
+}
+
+catToNum7 <- function(c) {
+  ifelse (c == "H",7,c) 
+}
+
+catToNum8 <- function(c) {
+  ifelse (c == "I",8,c) 
+}
+
+catToNum9 <- function(c) {
+  ifelse (c == "J",9,c) 
+}
+
+catToNum10 <- function(c) {
+  ifelse (c == "K",10,c) 
+}
+
+catToNum11 <- function(c) {
+  ifelse (c == "L",11,c) 
+}
+
+catToNum12 <- function(c) {
+  ifelse (c == "M",12,c) 
+}
+
+catToNum13 <- function(c) {
+  ifelse (c == "N",13,c) 
+}
+
+catToNum14 <- function(c) {
+  ifelse (c == "O",14,c) 
+}
+
+catToNum15 <- function(c) {
+  ifelse (c == "P",15,c) 
+}
+
+catToNum16 <- function(c) {
+  ifelse (c == "Q",16,c) 
+}
+
+catToNum17 <- function(c) {
+  ifelse (c == "R",17,c) 
+}
+
+catToNum18 <- function(c) {
+  ifelse (c == "S",18,c) 
+}
+
+catToNum19 <- function(c) {
+  ifelse (c == "T",19,c) 
+}
+
+catToNum20 <- function(c) {
+  ifelse (c == "U",20,c) 
+}
+
+catToNum21 <- function(c) {
+  ifelse (c == "V",21,c) 
+}
+
+catToNum22 <- function(c) {
+  ifelse (c == "W",22,c) 
+}
+
+catToNum23 <- function(c) {
+  ifelse (c == "X",23,c) 
+}
+
+catToNum24 <- function(c) {
+  ifelse (c == "Y",24,c) 
+}
+
+catToNum25 <- function(c) {
+  ifelse (c == "Z",25,c) 
+}
+
+
+
+
+
+
+
+# Note: changes it in place! 
+# Also the function is applied to the entire column - many (but not all) functions in R may be used this way
+#letters <- lapply(letters, remType2)
+letters[1] <- lapply(letters[1],catToNum0)
+letters[1] <- lapply(letters[1],catToNum1)
+letters[1] <- lapply(letters[1],catToNum2)
+letters[1] <- lapply(letters[1],catToNum3)
+letters[1] <- lapply(letters[1],catToNum4)
+letters[1] <- lapply(letters[1],catToNum5)
+letters[1] <- lapply(letters[1],catToNum6)
+letters[1] <- lapply(letters[1],catToNum7)
+letters[1] <- lapply(letters[1],catToNum8)
+letters[1] <- lapply(letters[1],catToNum9)
+letters[1] <- lapply(letters[1],catToNum10)
+letters[1] <- lapply(letters[1],catToNum11)
+letters[1] <- lapply(letters[1],catToNum12)
+letters[1] <- lapply(letters[1],catToNum13)
+letters[1] <- lapply(letters[1],catToNum14)
+letters[1] <- lapply(letters[1],catToNum15)
+letters[1] <- lapply(letters[1],catToNum16)
+letters[1] <- lapply(letters[1],catToNum17)
+letters[1] <- lapply(letters[1],catToNum18)
+letters[1] <- lapply(letters[1],catToNum19)
+letters[1] <- lapply(letters[1],catToNum20)
+letters[1] <- lapply(letters[1],catToNum21)
+letters[1] <- lapply(letters[1],catToNum22)
+letters[1] <- lapply(letters[1],catToNum23)
+letters[1] <- lapply(letters[1],catToNum24)
+letters[1] <- lapply(letters[1],catToNum25)
+letters[1] <- lapply(letters[1],strtoi) #Apparently the category numbers in letters[3] are stored as strings; convert to numbers
+
+head(letters)
+summary(letters)
+
+```
+
+```{r}
+sample_size <- 19500
+set.seed(1234) # setting random seed to make results repeatable
+
+picked <- sample(seq_len(nrow(letters)),size = sample_size)
+training <- letters[picked,]
+testing <- letters[-picked,]
+
+
+# Changing y into categorical data (performing one-hot encoding)
+
+yTr <- to_categorical(training$letter, num_classes = 26)
+yTest <- to_categorical(testing$letter, num_classes = 26)
+
+```
+
+```{r}
+
+model = keras_model_sequential() %>%
+  layer_dense(units = 64, activation = "relu",input_shape=(16)) %>%
+  layer_dense(units = 64, activation = "relu") %>%
+  layer_dense(units = ncol(yTr), activation = "softmax")
+
+
+model %>% compile(
+  loss = "categorical_crossentropy",
+  optimizer = "adam", #optimizer_rmsprop(),
+  metrics = "accuracy"
+)
+
+xTr <- as.matrix(training[,1:16]) # need to convert to a matrix
+xTest <- as.matrix(testing[,1:16])
+
+model %>% 
+  fit(
+    x = xTr, # input is the first 4 columns of the dataframe
+    y = yTr, # label is the last column
+    epochs = 25
+  )
+
+```
+```{r}
+model %>% evaluate(xTest, yTest)
+
+# Predicting likelihood of all categories:
+result <- model %>% predict(xTest)
+
+result
+
+testing[,5]
+
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
