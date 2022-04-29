@@ -31,7 +31,7 @@ Some preprocessing we did to the data in this attempt was delete the Type 2 colu
 
 ### `Attempt Based on Speed` <a name="speed-attempt"></a>
 
-This was our second attempt at classifying the Pokemon dataset.
+This was our second attempt at classifying the Pokemon dataset. It's corresponding code can be found in the ***pokemonSpeed.md*** file
 
 * **Goal:** Based on the poor results from the first attempt, we chose to reduce the 18 types into 4 categories based on speed. How we went about this can be seen in a file we created called ***Average Pokemon Speed Based on Pokemon FireRed and Pokemon Emerald.csv***. We took the speed of every Pokemon in the games Pokemon FireRed and Pokemon Emerald and collected them in a spreadsheet, organizing it by the types of Pokemon. Then we found the average of the speeds and split up the types into the categories so that each category had a similar number of types. Our goal for this attempt was to classify Pokemon into one of the four categories: 
     * Super Slow (0): Fairy, Steel, Rock, Ground, Grass
@@ -51,7 +51,7 @@ For preprocessing, we decided to only consider Pokemon with 2 types. In the last
 
 ### `Attempt Based on Ratio of Total Attack Stats to Total Defense Stats` <a name="ratio-attempt"></a>
 
-This was our last attempt at using the Pokemon dataset.
+This was our last attempt at using the Pokemon dataset. It's corresponding code can be found in the ***pokemonRatio.md*** file
 
 * **Goal:** For this attempt, we divided the 18 types of Pokemon into 3 categories (low/mid/high) based on the ratio of their combined attack & special attack versus their combined defense and special defense. Essentially, is a pokemon type more likely to have a better offense or defense? As an example, a steel type pokemon on average has less attack power than it does defense, and a fire type pokemon on average has more attack power than it does defense Our categorization was based on the model from https://imgur.com/gallery/fGPnPFV: 
 ![pokemon3DM](https://user-images.githubusercontent.com/60119741/165883901-e2eecc9f-d12a-44d2-bebe-54266a4ce3e2.jpg) <br>
