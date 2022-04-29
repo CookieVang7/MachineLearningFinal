@@ -78,6 +78,12 @@ We did not want to use a recurrent neural network because the data is nonsequent
 
 ![Screenshot from 2022-04-29 13-35-57](https://user-images.githubusercontent.com/60119741/166005668-088a044e-bda2-4a2d-916e-d827c69849e7.png)
 
+^The top graph is loss and the bottom graph is accuracy^
+
+We started by randomly using 19500 of the examples as training and then 500 as testing data. This yielded the result of approximately 98% accuracy. Then we tried using 16000 examples of training and 4000 examples of testing and it yielded the same resault. 
+
+This data set worked really well because of the large data set. We found that this one was easy to work with and easy to get good resaults because there is a lot of attribute information about each letter. The information also directly corresponds to the category and each category is well represented. The pokemon dataset was hard to work with because there was only 800 total samples and each category was vastly different in size. So it was fairly common for us to run into the issue that the neural network would always choose the majority category because it could achieve high accuracy in the training model.
+
 **Attribute Information:**
 1. lettr capital letter (26 values from A to Z)
 2. x-box horizontal position of box (integer)
@@ -98,4 +104,4 @@ We did not want to use a recurrent neural network because the data is nonsequent
 17. yegvx correlation of y-ege with x (integer)
 
 ## Overall Results and Conclusion <a name="results-conclusion"></a>
-
+We found that overall the pokemon dataset was difficult to work with. The type of the pokemon does not correlate to the pokemon's stats in any meaningful way. We found this out when our best earliest attempts had an accuracy of 25%. Even after tinkering with the dataset to create better circumstances, we found that there was no way to recategorize the dataset to create correlation. We tried to narrow the types down to three categories defined by speed, which resulted in us having two minority categories that went underrepresented. We then expanded to four speed categories which also had the same underrepresntation. 
