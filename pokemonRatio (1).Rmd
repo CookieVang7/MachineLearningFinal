@@ -1,0 +1,240 @@
+---
+title: "pokemonRatio"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+library(keras)
+library(tfdatasets)
+
+pokemon <- read.csv("pokemon.csv")
+
+#We only consider data points (pokemon) that have 1 type, so we filter out any 
+#pokemon that have a second type (Type.2)
+pokemon <- pokemon[(is.na(pokemon$Type.2) | pokemon$Type.2==""), ]
+
+#Deleting columns of the dataset that we don't need to help filter out noise
+pokemon <- subset(pokemon, select = -c(X.,Name,Total,HP,Type.2,Speed,Generation,Legendary))
+
+
+
+
+
+
+```
+
+
+```{r}
+
+#CATEGORIZING BASED ON RATIO OF TOTAL ATTACKING STATS TO TOTAL DEFENSIVE STATS
+
+#LOW (0): Ghost, Bug, Rock, Steel, Fairy
+#MID (1):  Water, Ground, Grass, Psychic, Ice, Poison, Normal
+#HIGH (2): Electric, Flying, Dragon, Fighting, Fire, Dark
+
+
+catToNum0 <- function(c) {
+  ifelse (c == "Normal",1,c) 
+}
+
+
+catToNum1 <- function(c) {
+  ifelse (c == "Fire",2,c)
+}
+
+catToNum2 <- function(c) {
+  ifelse (c == "Water",1,c)
+}
+
+catToNum3 <- function(c) {
+  ifelse (c == "Grass",1,c)
+}
+
+catToNum4 <- function(c) {
+  ifelse (c == "Flying",2,c)
+}
+
+catToNum5 <- function(c) {
+  ifelse (c == "Fighting",2,c)
+}
+
+catToNum6 <- function(c) {
+  ifelse (c == "Poison",1,c)
+}
+
+catToNum7 <- function(c) {
+  ifelse (c == "Electric",2,c)
+}
+
+catToNum8 <- function(c) {
+  ifelse (c == "Ground",1,c)
+}
+
+catToNum9 <- function(c) {
+  ifelse (c == "Rock",0,c)
+}
+
+catToNum10 <- function(c) {
+  ifelse (c == "Psychic",1,c)
+}
+
+catToNum11 <- function(c) {
+  ifelse (c == "Ice",1,c)
+}
+
+catToNum12 <- function(c) {
+  ifelse (c == "Bug",0,c)
+}
+
+catToNum13 <- function(c) {
+  ifelse (c == "Ghost",0,c)
+}
+
+catToNum14 <- function(c) {
+  ifelse (c == "Steel",0,c)
+}
+
+catToNum15 <- function(c) {
+  ifelse (c == "Dragon",2,c)
+}
+
+catToNum16 <- function(c) {
+  ifelse (c == "Dark",2,c)
+}
+
+catToNum17 <- function(c) {
+  ifelse (c == "Fairy",0,c)
+}
+
+rowNumber = 0
+
+remType2 <- function(c) {
+  ifelse (is.na(c[4]) -c(),c)
+    rowNumber = rowNumber + 1
+    print(rowNumber)
+}
+
+
+catToNum1("Normal")
+catToNum2("Fire")
+catToNum3("Water")
+
+# Note: changes it in place! 
+# Also the function is applied to the entire column - many (but not all) functions in R may be used this way
+#pokemon <- lapply(pokemon, remType2)
+pokemon[1] <- lapply(pokemon[1],catToNum0)
+pokemon[1] <- lapply(pokemon[1],catToNum1)
+pokemon[1] <- lapply(pokemon[1],catToNum2)
+pokemon[1] <- lapply(pokemon[1],catToNum3)
+pokemon[1] <- lapply(pokemon[1],catToNum4)
+pokemon[1] <- lapply(pokemon[1],catToNum5)
+pokemon[1] <- lapply(pokemon[1],catToNum6)
+pokemon[1] <- lapply(pokemon[1],catToNum7)
+pokemon[1] <- lapply(pokemon[1],catToNum8)
+pokemon[1] <- lapply(pokemon[1],catToNum9)
+pokemon[1] <- lapply(pokemon[1],catToNum10)
+pokemon[1] <- lapply(pokemon[1],catToNum11)
+pokemon[1] <- lapply(pokemon[1],catToNum12)
+pokemon[1] <- lapply(pokemon[1],catToNum13)
+pokemon[1] <- lapply(pokemon[1],catToNum14)
+pokemon[1] <- lapply(pokemon[1],catToNum15)
+pokemon[1] <- lapply(pokemon[1],catToNum16)
+pokemon[1] <- lapply(pokemon[1],catToNum17)
+pokemon[1] <- lapply(pokemon[1],strtoi)
+#Apparently the category numbers in pokemon[3] are stored as strings; convert to numbers
+
+head(pokemon)
+summary(pokemon)
+
+```
+
+```{r}
+sample_size <- 308
+set.seed(1234) # setting random seed to make results repeatable
+
+picked <- sample(seq_len(nrow(pokemon)),size = sample_size)
+training <- pokemon[picked,]
+testing <- pokemon[-picked,]
+
+
+# Changing y into categorical data (performing one-hot encoding)
+
+yTr <- to_categorical(training$Type.1, num_classes = 3)
+yTest <- to_categorical(testing$Type.1, num_classes = 3)
+
+```
+
+```{r}
+
+#model = keras_model_sequential() %>%
+#  layer_dense(units = 64, activation = "relu",input_shape=(4)) %>%
+#  layer_dense(units = 64, activation = "relu") %>%
+#  layer_dense(units = 64, activation = "relu") %>%
+#  layer_dense(units = 64, activation = "relu") %>%
+#  layer_dense(units = ncol(yTr), activation = "softmax")
+
+#Implementing l2 regularization to overall increase the testing accuracy
+model = keras_model_sequential() %>%
+  layer_dense(units = 64, activation = "relu",input_shape=(4)) %>%
+  layer_dense(units = 64, activation = "relu", regularizer_l2(l=0.001)) %>%
+  layer_dense(units = 64, activation = "relu", regularizer_l2(l=0.001)) %>%
+  layer_dense(units = 64, activation = "relu", regularizer_l2(l=0.001)) %>%
+  layer_dense(units = ncol(yTr), activation = "softmax")
+
+#l2 regularization along with increasing the hidden layers 
+#and number of nodes per hidden layer
+#model = keras_model_sequential() %>%
+#  layer_dense(units = 128, activation = "relu",input_shape=(4)) %>%
+#  layer_dense(units = 128, activation = "relu", regularizer_l2(l=0.001)) %>%
+#  layer_dense(units = 128, activation = "relu", regularizer_l2(l=0.001)) %>%
+#  layer_dense(units = 128, activation = "relu", regularizer_l2(l=0.001)) %>%
+#  layer_dense(units = 128, activation = "relu", regularizer_l2(l=0.001)) %>%
+#  layer_dense(units = 128, activation = "relu", regularizer_l2(l=0.001)) %>%
+#  layer_dense(units = ncol(yTr), activation = "softmax")
+
+
+model %>% compile(
+  loss = "categorical_crossentropy",
+  optimizer = "adam", #optimizer_rmsprop(),
+  metrics = "accuracy"
+)
+
+xTr <- as.matrix(training[,1:4]) # need to convert to a matrix
+xTest <- as.matrix(testing[,1:4])
+
+model %>% 
+  fit(
+    x = xTr, # input is the first 4 columns of the dataframe
+    y = yTr, # label is the last column
+    epochs = 40
+  )
+
+```
+
+
+```{r}
+summary(model)
+```
+
+
+```{r}
+model %>% evaluate(xTest, yTest)
+
+# Predicting likelihood of all categories:
+#result <- model %>% predict(xTest)
+
+#result
+
+#testing[,5]
+
+```
