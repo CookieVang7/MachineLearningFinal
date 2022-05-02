@@ -43,7 +43,8 @@ This was our second attempt at classifying the Pokemon dataset. It's correspondi
 
 * **Design Matrix:** 
 
-![pokemon2DM](https://user-images.githubusercontent.com/60119741/165854823-d9f580ca-3241-4c5d-91af-f793cdf5cb46.jpg)
+![pokemon2DM](https://user-images.githubusercontent.com/60119741/166183297-415f620c-1156-43c3-a3d6-c85b72569149.jpg)
+
 
 For preprocessing, we decided to only consider Pokemon with 2 types. In the last attempt, we omitted Type 2 from all Pokemon, so this time we wanted to try considering either all dual type Pokemon or all single type Pokemon to see if that made a difference. Considering all dual types also gave us a way to delete all entries with NA in the dataset. We again deleted the Generation column and used the same 7 features seen as we did for the first attempt. Each category/label was coded into a number (not ordered) ranging from 0 to 3. 
 
