@@ -65,7 +65,8 @@ Our goal is to classify pokemon into either low, mid, or high:
 
 * **Design Matrix:** 
 
-![pokemon4DM](https://user-images.githubusercontent.com/60119741/165886772-b1a7c7b5-d687-405e-a37b-bfbc6d629863.jpg)
+![pokemon3DM](https://user-images.githubusercontent.com/60119741/166188776-e9f83a30-1f8b-4fda-ba4b-4e5e3bb96a7c.jpg)
+
 
 We did far more preprocessing than we did compared to the other two attempts. We took out Pokemon number, Name, Type 2, Total, HP, Speed, Generation, and Legendary status. That left 4 features: Attack, Defense, Special Attack, and Special Defense. We chose to do this to filter out noise and let the network only focus on the stats that truly matter. After little progress with considering dual type Pokemon in the second attempt, for this attempt, we chose to only consider Pokemon that have a single type. It isn’t unusual when a dual type Pokemon (say Heracross, a Pokemon that is a bug and fighting type) has a type that contradicts the other. Using Heracross as an example, bug types usually have a low attack stat, but because Heracross is also a fighting type, its attack is very high. This makes Heracross hard to categorize because the high attack stat would suggest to the model that Heracross is not a bug type. The three categories were labeled 0 through 2.
 
